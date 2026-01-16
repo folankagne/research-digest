@@ -45,29 +45,50 @@ def filter_and_rank_papers(papers, research_interests, max_papers):
         raise ValueError("GEMINI_API_KEY not found in environment variables")
 
     genai.configure(api_key=api_key)
-    model = genai.GenerativeModel('gemini-pro')
+    model = genai.GenerativeModel('gemini-2.0-flash-exp')
 
-    prompt = f"""
-You are a research assistant. Given the following research interests:
+    # Build papers list with full information
+    papers_list = []
+    for i, p in enumerate(papers[:150], 1):  # Increased to 150 papers
+        papers_list.append(f"{i}. **{p['title']}** (Source: {p['source']})\n   Abstract: {p['summary'][:400]}\n   Link: {p['link']}")
 
+    prompt = f"""You are an expert research assistant with deep knowledge of academic literature.
+
+RESEARCHER'S PROFILE:
 {research_interests}
 
-Review these papers and return the TOP {max_papers} most relevant ones.
-For each relevant paper, provide:
-1. Title
-2. One sentence explaining why it's relevant
-3. Key contribution in one sentence
+YOUR TASK:
+Carefully review the papers below and select the TOP {max_papers} most valuable papers for this researcher.
+Be highly selective - only include papers that would genuinely advance their research.
 
-Papers to review:
-{chr(10).join([f"- {p['title']} ({p['source']}): {p['summary'][:200]}..." for p in papers[:100]])}
+PAPERS TO REVIEW:
+{chr(10).join(papers_list)}
 
-Format your response as:
-## Paper Title (Source)
-**Why relevant:** ...
-**Key contribution:** ...
-[Link]
+OUTPUT FORMAT:
+For each selected paper, provide:
 
-Only include the most relevant papers.
+### [Paper Number]. Paper Title
+
+**Source:** [Journal/Working Paper Series]
+
+**Why this matters:** [2-3 sentences explaining the paper's relevance to the researcher's work. Be specific - reference their research questions, methods, or contexts. Explain what they can learn or adapt from this paper.]
+
+**Key findings:** [2-3 sentences on the main empirical results, methodology, or theoretical contribution. Focus on actionable insights.]
+
+**Link:** [Full URL]
+
+---
+
+CRITICAL INSTRUCTIONS:
+- Quality over quantity: It's better to return 5 exceptional papers than 15 mediocre ones
+- Be ruthless: Only include papers that directly advance their research agenda
+- Prioritize papers with strong identification strategies and novel contributions
+- Skip papers that are tangentially related or merely descriptive
+- For each paper, think: "Would I email this to them if I were their research assistant?"
+- Order papers by relevance (most relevant first)
+- If fewer than {max_papers} papers meet the high bar, that's okay - only return the truly valuable ones
+
+Begin your response with a brief 1-sentence summary of the overall quality and themes of this week's papers, then list the selected papers.
 """
 
     response = model.generate_content(prompt)
@@ -76,29 +97,100 @@ Only include the most relevant papers.
 
 def generate_html_email(digest_content, config):
     """Generate HTML email from digest content"""
+    # Convert markdown-style formatting to HTML
+    import re
+
+    # Convert ### headings to h3
+    digest_content = re.sub(r'###\s+(.+)', r'<h3>\1</h3>', digest_content)
+
+    # Convert **bold** to <strong>
+    digest_content = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', digest_content)
+
+    # Convert links
+    digest_content = re.sub(r'\[(.+?)\]\((.+?)\)', r'<a href="\2">\1</a>', digest_content)
+
+    # Convert line breaks
+    digest_content = digest_content.replace('\n\n', '<br><br>')
+
     html = f"""
     <html>
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
-            body {{ font-family: Arial, sans-serif; line-height: 1.6; color: #333; }}
-            h1 {{ color: #0060df; }}
-            h2 {{ color: #003d99; border-bottom: 2px solid #e0e0e0; padding-bottom: 5px; }}
-            .paper {{ margin: 20px 0; padding: 15px; background-color: #f8f9fa; border-radius: 5px; }}
-            .meta {{ color: #666; font-size: 0.9em; }}
-            a {{ color: #0060df; text-decoration: none; }}
+            body {{
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+                line-height: 1.6;
+                color: #1a1a1a;
+                max-width: 700px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #ffffff;
+            }}
+            h1 {{
+                color: #0060df;
+                font-size: 28px;
+                margin-bottom: 10px;
+                border-bottom: 3px solid #0060df;
+                padding-bottom: 10px;
+            }}
+            h3 {{
+                color: #003d99;
+                font-size: 18px;
+                margin-top: 30px;
+                margin-bottom: 12px;
+                line-height: 1.4;
+            }}
+            .meta {{
+                color: #666;
+                font-size: 14px;
+                margin-bottom: 30px;
+            }}
+            a {{
+                color: #0060df;
+                text-decoration: none;
+                font-weight: 500;
+            }}
+            a:hover {{
+                color: #003d99;
+                text-decoration: underline;
+            }}
+            strong {{
+                color: #003d99;
+                font-weight: 600;
+            }}
+            hr {{
+                border: none;
+                border-top: 1px solid #e0e0e0;
+                margin: 40px 0 20px 0;
+            }}
+            .footer {{
+                color: #999;
+                font-size: 13px;
+                margin-top: 40px;
+                padding-top: 20px;
+                border-top: 1px solid #e0e0e0;
+            }}
+            .summary {{
+                background-color: #f8f9fa;
+                padding: 15px;
+                border-radius: 8px;
+                margin: 20px 0;
+                font-style: italic;
+                color: #555;
+            }}
         </style>
     </head>
     <body>
-        <h1>Your Research Digest</h1>
-        <p class="meta">Generated: {datetime.now().strftime('%Y-%m-%d')}</p>
+        <h1>📚 Research Digest</h1>
+        <p class="meta">{datetime.now().strftime('%B %d, %Y')}</p>
 
         {digest_content}
 
-        <hr>
-        <p style="color: #666; font-size: 0.9em;">
-            Generated automatically by your personal research digest.
-            <br>To modify preferences, edit config.yaml in your repository.
-        </p>
+        <div class="footer">
+            <p>Generated by your personal <a href="https://github.com/zytynski/research-digest">Research Digest</a></p>
+            <p style="font-size: 12px; color: #bbb;">To modify preferences, edit config.yaml in your repository</p>
+        </div>
     </body>
     </html>
     """
