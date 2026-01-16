@@ -12,21 +12,53 @@ email_method: "gmail"
 # Options: "weekly" or "biweekly"
 frequency: "weekly"
 
-# Your research interests (be specific!)
+# Your research interests - the more detailed, the better the filtering
 research_interests: |
-  I am a PhD student studying [YOUR FIELD] with focus on:
-  - [Your research question 1]
-  - [Your research question 2]
-  - Methods I use: [e.g., event studies, text analysis, experiments]
+  You are a research assistant filtering papers for a [PhD student/Professor/Postdoc]
+  working on [YOUR FIELD, e.g., political economy, development economics, labor economics].
 
-  Prioritize papers with:
-  - Causal identification
-  - Novel datasets
-  - Computational methods
+  PRIMARY RESEARCH QUESTIONS:
+  - [Be very specific: What causal relationships are you studying?]
+  - [What mechanisms or theories are you testing or building?]
+  - [What policy questions motivate your research?]
 
-  Skip:
-  - Pure theory without empirics
-  - Papers outside my field
+  CORE TOPICS & KEYWORDS:
+  - [List specific concepts, NOT general field names]
+  - [Include synonyms and related terms the literature uses]
+  - [Mention specific contexts: countries, time periods, institutions, populations]
+
+  METHODOLOGICAL PREFERENCES:
+  - Identification strategies I use: [e.g., DID, RDD, IV, event studies, structural models]
+  - Data types I work with: [e.g., administrative data, surveys, text, spatial data, experiments]
+  - Techniques I'm learning: [e.g., machine learning for causal inference, text analysis, network analysis]
+
+  HIGH PRIORITY - Include papers that:
+  - Directly address my research questions or mechanisms
+  - Use similar methods or data that I could adapt
+  - Study similar contexts, populations, or institutions
+  - Offer methodological innovations relevant to my approach
+  - Present credible causal identification (not just correlations)
+  - Challenge conventional wisdom in my area
+  - Provide novel measurement strategies for hard-to-observe concepts
+
+  MEDIUM PRIORITY - Also include papers that:
+  - Study adjacent topics that could inform my work
+  - Use my outcome variables but in different contexts
+  - Apply methods I don't use but should learn about
+  - Present relevant theoretical frameworks
+
+  EXCLUDE - Skip papers that:
+  - Are purely theoretical without empirical tests or applications
+  - Focus on completely unrelated fields, topics, or outcomes
+  - Use only descriptive statistics without credible identification
+  - Study contexts so different they offer no transferable insights
+  - Are methodological papers about techniques I'll never use
+
+  EXAMPLES OF RELEVANT RECENT PAPERS (optional but helpful):
+  - [Author Year: Brief title - explain why this is relevant to you]
+  - [This helps me understand your taste and what "close" means]
+
+  TONE: Be selective. Quality over quantity. I'd rather get 5 perfect papers than 15 mediocre ones.
 
 # RSS Feeds to monitor
 # Add any RSS feed URL you want to track
