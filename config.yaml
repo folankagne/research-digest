@@ -1,0 +1,50 @@
+# Research Digest Configuration
+# Edit this file to customize your digest
+
+# Your email address
+email: "your.email@example.com"
+
+# Email delivery method
+# Options: "print" (just preview, no email) or "gmail" (send via Gmail)
+email_method: "gmail"
+
+# How often to receive digest
+# Options: "weekly" or "biweekly"
+frequency: "weekly"
+
+# Your research interests (be specific!)
+research_interests: |
+  I am a PhD student studying [YOUR FIELD] with focus on:
+  - [Your research question 1]
+  - [Your research question 2]
+  - Methods I use: [e.g., event studies, text analysis, experiments]
+
+  Prioritize papers with:
+  - Causal identification
+  - Novel datasets
+  - Computational methods
+
+  Skip:
+  - Pure theory without empirics
+  - Papers outside my field
+
+# RSS Feeds to monitor
+# Add any RSS feed URL you want to track
+feeds:
+  # Economics
+  - name: "NBER Working Papers"
+    url: "https://www.nber.org/rss/new.xml"
+
+  - name: "ArXiv Economics"
+    url: "http://arxiv.org/rss/econ"
+
+  - name: "CEPR Discussion Papers"
+    url: "https://cepr.org/content/discussion-papers-rss-feed"
+
+  # Add more feeds here:
+  # - name: "Your Source"
+  #   url: "https://example.com/feed"
+
+# Advanced settings
+max_papers: 15  # Maximum papers in each digest
+min_relevance_score: 0.6  # Filter threshold (0-1)
