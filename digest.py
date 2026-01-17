@@ -46,7 +46,8 @@ def filter_and_rank_papers(papers, research_interests, max_papers):
 
     genai.configure(api_key=api_key)
     #model = genai.GenerativeModel('gemini-2.0-flash-exp')
-    model = genai.GenerativeModel('gemini-1.5-flash')
+    #model = genai.GenerativeModel('gemini-1.5-flash')
+    model = genai.GenerativeModel('gemini-1.5-flash-latest')
 
     # Build papers list with full information
     papers_list = []
