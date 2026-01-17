@@ -45,7 +45,8 @@ def filter_and_rank_papers(papers, research_interests, max_papers):
         raise ValueError("GEMINI_API_KEY not found in environment variables")
 
     genai.configure(api_key=api_key)
-    model = genai.GenerativeModel('gemini-2.0-flash-exp')
+    #model = genai.GenerativeModel('gemini-2.0-flash-exp')
+    model = genai.GenerativeModel('gemini-1.5-flash')
 
     # Build papers list with full information
     papers_list = []
