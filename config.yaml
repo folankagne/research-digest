@@ -2,81 +2,162 @@
 # Edit this file to customize your digest
 
 # Your email address
-email: "your.email@example.com"
+email: "folan.kagne@psemail.eu"
 
 # Email delivery method
 # Options: "print" (just preview, no email) or "gmail" (send via Gmail)
-email_method: "gmail"
+email_method: "print"
 
 # How often to receive digest
 # Options: "weekly" or "biweekly"
-frequency: "weekly"
+frequency: "biweekly"
 
 # Your research interests - the more detailed, the better the filtering
 research_interests: |
-  You are a research assistant filtering papers for a [PhD student/Professor/Postdoc]
-  working on [YOUR FIELD, e.g., political economy, development economics, labor economics].
-
+  You are a research assistant filtering papers for a PhD student in economics at 
+  École d'Économie de Paris working on behavioral economics, experimental economics, 
+  and economics of crime, with a specific focus on social exclusion and cooperation 
+  in carceral settings.
+  
   PRIMARY RESEARCH QUESTIONS:
-  - [Be very specific: What causal relationships are you studying?]
-  - [What mechanisms or theories are you testing or building?]
-  - [What policy questions motivate your research?]
-
+  - How does social exclusion causally affect cooperation, prosocial behavior, and reintegration 
+    prospects among incarcerated individuals?
+  - Can psychological interventions (inclusion priming, identity salience) mitigate the negative 
+    effects of exclusion on inmate cooperation?
+  - Does economic precarity during incarceration increase recidivism, and can state financial 
+    aid reduce reoffending?
+  - What are the mediating mechanisms (alienation, stigma, need-threat, identity erosion) linking 
+    exclusion to antisocial behavior?
+  - How do prison conditions, isolation, and institutional factors shape social behavior and 
+    post-release outcomes?
+  
   CORE TOPICS & KEYWORDS:
-  - [List specific concepts, NOT general field names]
-  - [Include synonyms and related terms the literature uses]
-  - [Mention specific contexts: countries, time periods, institutions, populations]
-
+  - Incarceration, prison, detention, carceral settings, inmates, prisoners
+  - Recidivism, reoffending, reintegration, rehabilitation, desistance
+  - Social exclusion, ostracism, marginalization, stigma, alienation, isolation
+  - Cooperation, prosocial behavior, trust, public goods, social preferences
+  - Criminal justice policy, penal policy, sentencing, alternatives to incarceration
+  - Economic precarity, poverty, indigent aid, financial support for prisoners
+  - Group identity, ingroup/outgroup dynamics, social categorization
+  - Behavioral experiments in field settings, lab-in-the-field, artefactual field experiments
+  - Discrimination, racial inequality, structural racism (secondary interest, especially French context)
+  - Media coverage effects on criminal justice perceptions
+  
   METHODOLOGICAL PREFERENCES:
-  - Identification strategies I use: [e.g., DID, RDD, IV, event studies, structural models]
-  - Data types I work with: [e.g., administrative data, surveys, text, spatial data, experiments]
-  - Techniques I'm learning: [e.g., machine learning for causal inference, text analysis, network analysis]
-
+  - Identification strategies I use: Regression Discontinuity Design (RDD), behavioral experiments 
+    (public goods games, trust games), priming interventions, quasi-experimental methods, mixed-effects models
+  - Data types I work with: Administrative prison data (Genesis system in France), experimental 
+    data from behavioral games, psychometric surveys (validated psychological scales), interview data, 
+    longitudinal panel data with repeated measures
+  - Techniques I'm learning: Mediation analysis, strategy method elicitation in games, text analysis 
+    of qualitative interviews, matching methods for observational data
+  
   HIGH PRIORITY - Include papers that:
-  - Directly address my research questions or mechanisms
-  - Use similar methods or data that I could adapt
-  - Study similar contexts, populations, or institutions
-  - Offer methodological innovations relevant to my approach
-  - Present credible causal identification (not just correlations)
-  - Challenge conventional wisdom in my area
-  - Provide novel measurement strategies for hard-to-observe concepts
-
+  - Study prosocial behavior (cooperation, trust, altruism) using experiments or quasi-experiments
+  - Examine criminal justice outcomes (recidivism, desistance, rehabilitation) with causal identification
+  - Investigate social exclusion, stigma, or marginalization and their behavioral consequences
+  - Use behavioral experiments in non-standard populations (prisoners, marginalized groups, field settings)
+  - Apply psychology frameworks (identity, need-threat, ostracism) to economic behavior
+  - Study prison conditions, detention environments, or incarceration effects on behavior
+  - Evaluate criminal justice interventions or rehabilitation programs with rigorous methods
+  - Examine ingroup/outgroup dynamics, social identity, or group-based cooperation
+  - Use administrative data on criminal justice or welfare systems
+  - Study financial precarity and its effects on crime or prosocial behavior
+  - Investigate discrimination or racial inequality using experimental or causal methods (especially in France)
+  
   MEDIUM PRIORITY - Also include papers that:
-  - Study adjacent topics that could inform my work
-  - Use my outcome variables but in different contexts
-  - Apply methods I don't use but should learn about
-  - Present relevant theoretical frameworks
-
+  - Study public goods provision, common pool resources, or collective action in any context
+  - Examine psychological interventions that affect economic behavior or decision-making
+  - Use RDD or other quasi-experimental designs in social policy evaluation
+  - Study stigma, shame, or social sanctions in economic contexts
+  - Investigate labor market reintegration for marginalized populations
+  - Present novel psychometric measurement or survey design
+  - Study media effects on policy attitudes or public opinion about crime
+  - Apply behavioral economics to institutional design or policy
+  
   EXCLUDE - Skip papers that:
-  - Are purely theoretical without empirical tests or applications
-  - Focus on completely unrelated fields, topics, or outcomes
-  - Use only descriptive statistics without credible identification
-  - Study contexts so different they offer no transferable insights
-  - Are methodological papers about techniques I'll never use
-
-  EXAMPLES OF RELEVANT RECENT PAPERS (optional but helpful):
-  - [Author Year: Brief title - explain why this is relevant to you]
-  - [This helps me understand your taste and what "close" means]
-
-  TONE: Be selective. Quality over quantity. I'd rather get 5 perfect papers than 15 mediocre ones.
+  - Are purely theoretical models without empirical application or policy relevance
+  - Focus on macroeconomics, finance, international trade, or monetary policy
+  - Study health or education without connection to crime, justice, or inequality
+  - Use only correlational analysis without any attempt at causal identification
+  - Study corporate behavior, firm performance, or industrial organization
+  - Are methodological papers about techniques unrelated to experiments or quasi-experiments
+  - Focus on developed country labor markets without connection to marginalization or crime
+  
+  EXAMPLES OF RELEVANT RECENT PAPERS:
+  - Bhuller et al. (2020, QJE): "Incarceration, Recidivism, and Employment" - quasi-experimental 
+    evidence on how incarceration length affects post-release outcomes
+  - Alsan & Yang (2025): Experimental evidence on prosocial interventions in correctional settings
+  - Balafoutas et al. (2020): Rehabilitation and cooperation experiments with inmates
+  - Chen et al. (2024): Exploring cooperation and social preferences in prison populations
+  - Traversa et al. (2025): Psychological framework on chronic social exclusion during incarceration
+  - Galbiati et al. (2020, AER): Prison conditions and recidivism using French administrative data
+  - Candelo & Eckel (2017): Social exclusion, identity, and economic games
+  - Fahmy & Berman (2022): Social exclusion effects on trust and cooperation
+  - Wacquant (2009): Sociological analysis of prisons and poverty
+  - Any papers using public goods games, trust games, or dictator games to study cooperation
+  - Any papers using RDD to evaluate social welfare or criminal justice programs
+  
+  TONE: Be highly selective. I need papers I can cite or build on directly. Prioritize experimental 
+  and quasi-experimental work with clear causal identification. Quality over quantity - I'd rather 
+  get 8 excellent papers than 15 mediocre ones. Focus on behavioral economics, experimental economics, 
+  criminology, and applied microeconomics. Skip pure theory, macro, and anything without direct 
+  relevance to incarceration, cooperation, or inequality.
 
 # RSS Feeds to monitor
-# Add any RSS feed URL you want to track
 feeds:
-  # Economics
+  # Economics working papers
   - name: "NBER Working Papers"
     url: "https://www.nber.org/rss/new.xml"
-
   - name: "ArXiv Economics"
-    url: "http://arxiv.org/rss/econ"
-
+    url: "http://arxiv.org/rss/econ" #TODO and check ? 
   - name: "CEPR Discussion Papers"
-    url: "https://cepr.org/content/discussion-papers-rss-feed"
+    url: "https://cepr.org/rss/discussion-paper"
+  - name: "IZA Discussion Papers"
+    url: "https://www.iza.org/en/publications/discussion-papers/rss" #TODO and check ? 
+  - name: "VoxEU"
+    url: "https://voxeu.org/rss.xml"
 
-  # Add more feeds here:
-  # - name: "Your Source"
-  #   url: "https://example.com/feed"
+  # NEP Reports on IDEAS
+  - name: "NEP-CBE Cognitive and Behavioural Economics"
+    url: "https://nep.repec.org/rss/nep-cbe.rss.xml"
+  - name: "NEP-EXP Experimental Economics"
+    url: "https://nep.repec.org/rss/nep-exp.rss.xml" 
+  - name: "NEP-LAW Law and Economics"
+    url: "https://nep.repec.org/rss/nep-law.rss.xml"
+  - name: "NEP-PBE Public Economics"
+    url: "https://nep.repec.org/rss/nep-pbe.rss.xml" 
+  - name: "NEP-SOC Social Norms and Social Capital"
+    url: "https://nep.repec.org/rss/nep-soc.rss.xml"
+  
+  # French Economics Institutions (via RePEc CitEc)
+  # Note: Add `/rss` or check CitEc for exact RSS URL
+  - name: "PSE Working Papers"
+    url: "https://ideas.repec.org/s/hal/psewpa.rss"  # TODO: do not find any for now unfort.
+  - name: "CREST Working Papers"
+    url: "https://ideas.repec.org/s/crs/wpaper.rss"  # TODO: do not find any for now unfort.  #No RSS on REPEC i priori je crois
+  
+  # Criminology
+  - name: "CrimPapers Aggregator"
+    url: "https://lesscrime.info/crimpapers/rss/"
+  - name: "Prison Policy Initiative"
+    url: "https://prisonpolicy.org/blog/feed"
+  
+  # Behavioral Economics
+  - name: "BehavioralEconomics.com"
+    url: "https://behavioraleconomics.com/feed"
+  - name: "Behavioral Scientist"
+    url: "https://behavioralscientist.org/feed"
+  - name: "Jason Collins (BE & Data Science)"
+    url: "https://jasoncollins.blog/index.xml"
+  - name: "Economics Psychology Policy"
+    url: "https://economicspsychologypolicy.blogspot.com/feeds/posts/default"
+  
+  # Law & Economics / Public Policy
+  # Add if RSS available:
+  # - name: "Journal of Public Economics (CitEc)"
+  #   url: "[check CitEc for exact URL]"
 
 # Advanced settings
-max_papers: 15  # Maximum papers in each digest
-min_relevance_score: 0.6  # Filter threshold (0-1)
+max_papers: 12  # Reduced to prioritize quality
+min_relevance_score: 0.7  # Higher threshold for selectivity
