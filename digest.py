@@ -7,11 +7,12 @@ Scans RSS feeds and generates personalized research digest using Gemini AI
 import os
 import yaml
 import feedparser
-import google.generativeai as genai
+from google import genai
 from datetime import datetime
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import time
 
 
 def load_config():
@@ -44,15 +45,15 @@ def filter_and_rank_papers(papers, research_interests, max_papers):
     if not api_key:
         raise ValueError("GEMINI_API_KEY not found in environment variables")
 
-    genai.configure(api_key=api_key)
-    #model = genai.GenerativeModel('gemini-2.0-flash-exp')
-    #model = genai.GenerativeModel('gemini-1.5-flash')
-    #model = genai.GenerativeModel('gemini-2.5-flash')
-    model = genai.GenerativeModel('gemini-pro')
+    # New SDK client
+    client = genai.Client(api_key=api_key)
+    
+    # Add safety delay
+    time.sleep(2)
 
     # Build papers list with full information
     papers_list = []
-    for i, p in enumerate(papers[:150], 1):  # Increased to 150 papers
+    for i, p in enumerate(papers[:150], 1):
         papers_list.append(f"{i}. **{p['title']}** (Source: {p['source']})\n   Abstract: {p['summary'][:400]}\n   Link: {p['link']}")
 
     prompt = f"""You are an expert research assistant with deep knowledge of academic literature.
@@ -94,25 +95,23 @@ CRITICAL INSTRUCTIONS:
 Begin your response with a brief 1-sentence summary of the overall quality and themes of this week's papers, then list the selected papers.
 """
 
-    response = model.generate_content(prompt)
+    # New SDK API call
+    response = client.models.generate_content(
+        model='gemini-1.5-flash',
+        contents=prompt
+    )
+    
     return response.text
 
 
 def generate_html_email(digest_content, config):
     """Generate HTML email from digest content"""
-    # Convert markdown-style formatting to HTML
     import re
 
-    # Convert ### headings to h3
+    # Convert markdown-style formatting to HTML
     digest_content = re.sub(r'###\s+(.+)', r'<h3>\1</h3>', digest_content)
-
-    # Convert **bold** to <strong>
     digest_content = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', digest_content)
-
-    # Convert links
     digest_content = re.sub(r'\[(.+?)\]\((.+?)\)', r'<a href="\2">\1</a>', digest_content)
-
-    # Convert line breaks
     digest_content = digest_content.replace('\n\n', '<br><br>')
 
     html = f"""
@@ -174,14 +173,6 @@ def generate_html_email(digest_content, config):
                 padding-top: 20px;
                 border-top: 1px solid #e0e0e0;
             }}
-            .summary {{
-                background-color: #f8f9fa;
-                padding: 15px;
-                border-radius: 8px;
-                margin: 20px 0;
-                font-style: italic;
-                color: #555;
-            }}
         </style>
     </head>
     <body>
@@ -205,7 +196,6 @@ def send_email(html_content, config):
     email_method = config.get('email_method', 'print')
 
     if email_method == 'print':
-        # Preview mode - just print the digest
         print("Email generation successful!")
         print(f"Would send to: {config['email']}")
         print("\nPreview:")
@@ -213,7 +203,6 @@ def send_email(html_content, config):
         return
 
     elif email_method == 'gmail':
-        # Gmail SMTP
         sender_email = os.environ.get('GMAIL_ADDRESS')
         sender_password = os.environ.get('GMAIL_APP_PASSWORD')
 
@@ -245,15 +234,12 @@ def main():
     """Main execution"""
     print("Starting Research Digest Generator...")
 
-    # Load configuration
     config = load_config()
     print(f"Configuration loaded for: {config['email']}")
 
-    # Fetch papers
     papers = fetch_papers(config['feeds'])
     print(f"Fetched {len(papers)} papers from {len(config['feeds'])} sources")
 
-    # Filter and rank
     print("Analyzing papers with AI...")
     digest_content = filter_and_rank_papers(
         papers,
@@ -261,10 +247,7 @@ def main():
         config['max_papers']
     )
 
-    # Generate email
     html_email = generate_html_email(digest_content, config)
-
-    # Send email
     send_email(html_email, config)
 
     print("Digest generation complete!")
