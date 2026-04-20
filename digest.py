@@ -7,7 +7,7 @@ Scans RSS feeds and generates personalized research digest using Gemini AI
 import os
 import yaml
 import feedparser
-from google import genai
+import google.genai
 from datetime import datetime
 import smtplib
 from email.mime.text import MIMEText
@@ -46,7 +46,9 @@ def filter_and_rank_papers(papers, research_interests, max_papers):
         raise ValueError("GEMINI_API_KEY not found in environment variables")
 
     # New SDK client
-    client = genai.Client(api_key=api_key)
+    #client = genai.Client(api_key=api_key)
+        # New SDK client - corrected initialization
+    client = google.genai.Client(api_key=api_key)
     
     # Add safety delay
     time.sleep(2)
