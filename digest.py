@@ -41,14 +41,17 @@ def fetch_papers(feeds):
 
 def filter_and_rank_papers(papers, research_interests, max_papers):
     """Use Gemini to filter and rank papers by relevance"""
+    from google.genai.types import HttpOptions
+    
     api_key = os.environ.get('GEMINI_API_KEY')
     if not api_key:
         raise ValueError("GEMINI_API_KEY not found in environment variables")
 
-    # New SDK client
-    #client = genai.Client(api_key=api_key)
-        # New SDK client - corrected initialization
-    client = google.genai.Client(api_key=api_key)
+    # New SDK client with API version v1 (supports gemini-1.5-flash)
+    client = google.genai.Client(
+        api_key=api_key,
+        http_options=HttpOptions(api_version="v1")
+    )
     
     # Add safety delay
     time.sleep(2)
