@@ -95,7 +95,7 @@ Begin your response with a brief 1-sentence summary of the overall quality and t
 
     try:
         response = client.models.generate_content(
-            model='gemini-2.0-flash',
+            model='gemini-2.5-flash',
             contents=prompt
         )
         return response.text
