@@ -41,19 +41,12 @@ def fetch_papers(feeds):
 
 def filter_and_rank_papers(papers, research_interests, max_papers):
     """Use Gemini to filter and rank papers by relevance"""
-    from google.genai.types import HttpOptions
-    
     api_key = os.environ.get('GEMINI_API_KEY')
     if not api_key:
         raise ValueError("GEMINI_API_KEY not found in environment variables")
 
-    # New SDK client with API version v1 (supports gemini-1.5-flash)
-    client = google.genai.Client(
-        api_key=api_key,
-        http_options=HttpOptions(api_version="v1")
-    )
-    
-    # Add safety delay
+    client = google.genai.Client(api_key=api_key)
+
     time.sleep(2)
 
     # Build papers list with full information
@@ -100,13 +93,18 @@ CRITICAL INSTRUCTIONS:
 Begin your response with a brief 1-sentence summary of the overall quality and themes of this week's papers, then list the selected papers.
 """
 
-    # New SDK API call
-    response = client.models.generate_content(
-        model='gemini-1.5-flash',
-        contents=prompt
-    )
-    
-    return response.text
+    try:
+        response = client.models.generate_content(
+            model='gemini-2.0-flash',
+            contents=prompt
+        )
+        return response.text
+    except google.genai.errors.ClientError as e:
+        if '429' in str(e):
+            raise RuntimeError(f"Gemini API quota exhausted. Try again later or reduce papers batch size.\n{e}")
+        elif '404' in str(e):
+            raise RuntimeError(f"Model not found. Run list_models.py to see available models.\n{e}")
+        raise
 
 
 def generate_html_email(digest_content, config):
